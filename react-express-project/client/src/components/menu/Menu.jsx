@@ -7,22 +7,25 @@ import DataCollectorMenu from './DataCollectorMenu';
 import Demarcation from './Demarcation';
 
 const Menu = (props) => {
-    const team = props.team.teamId;
+    const team = props.team;
+    const user = props.user;
+    const teamId = user.teamId;
+    
     const menuSelection = (team) => {
         
-        if (team === 'ቡድን 1') {
-            return <LeaseMenu />;
-        } else if (team === 'ቡድን 2') {
-            return <LandPrepMenu />;
-        } else if (team === 'ቡድን 3') {
+        if (teamId === 'ቡድን 1') {
+            return <LeaseMenu user = {user} team={team}/>;
+        } else if (teamId === 'ቡድን 2') {
+            return <LandPrepMenu user = {user} team={team}/>;
+        } else if (teamId === 'ቡድን 3') {
             return <LandBankMenu />;
-        } else if (team === 'ቡድን 4') {
+        } else if (teamId === 'ቡድን 4') {
             return <DataCollectorMenu />;
-        } else if (team === 'ቡድን 5') {
+        } else if (teamId === 'ቡድን 5') {
             return <Demarcation />;
-        } else if (team === 'ICT') {
+        } else if (teamId === 'ICT') {
             return <ICTMenu />;
-        } else if (team === '') {
+        } else if (teamId === '') {
             return <ICTMenu />;
         }
     }

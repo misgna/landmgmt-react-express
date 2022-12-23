@@ -72,15 +72,14 @@ const EmployeeRecord = () => {
             });
 
     }
-    const suspendUserAccount = (event) => {
-
+    const changeAccountStatus = (emp, status) => {
+        Axios.post(`http://localhost:4000/login/status/${emp.empId}/${status}`)
+        .then((response) => {
+            const confirmition = response.data;
+            alert(confirmition.message);
+        })
     }
-    const deleteUserAccount = (event) => {
-
-    }
-    const resetUserAccount = (event) => {
-
-    }
+   
     const handleChange = (event) => {
         event.preventDefault();
         const name = event.target.name;
@@ -239,13 +238,13 @@ const EmployeeRecord = () => {
                                     <Button variant="success badge" className='m-2' onClick={(event)=>createUserAccount(event, emp)}>
                                         መለያ ፍጠር
                                     </Button>
-                                    <Button variant="success badge" className='m-2' onClick={(event)=>suspendUserAccount(event, emp)}>
+                                    <Button variant="success badge" className='m-2' onClick={()=>changeAccountStatus(emp, "Suspended")}>
                                         መለያ ኣቁም
                                     </Button>
-                                    <Button variant="success badge" className='m-2' onClick={(event)=>deleteUserAccount(event, emp)}>
+                                    <Button variant="success badge" className='m-2' onClick={()=>changeAccountStatus(emp, "Deleted")}>
                                         መለያ ኣጥፋ
                                     </Button>
-                                    <Button variant="success badge" className='m-2' onClick={(event)=>resetUserAccount(event, emp)}>
+                                    <Button variant="success badge" className='m-2' onClick={()=>changeAccountStatus(emp, "Pending")}>
                                         መለያ ኣድስ
                                     </Button>
                                 </Card.Footer>

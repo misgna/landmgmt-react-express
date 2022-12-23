@@ -3,6 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import ListOfTasks from '../tasks/team4/info/ListOfTasks';
 //import SocioEconomicData from '../tasks/team4/tasks/socio-economic-data';
 import SED from '../tasks/team4/tasks/SED';
+import Mail from '../tasks/common/mail/Mail';
 
 
 const DataCollectorMenu = () => {
@@ -29,8 +30,9 @@ const DataCollectorMenu = () => {
                         </button>
                     </Nav.Item>
             </Nav>
-            {task === "tasks" && <ListOfTasks />}
-            {task === "data" && <SED />}
+            {task === "tasks" ? <ListOfTasks /> : null}
+            {task === "data" ? <SED /> : null}
+            {task === "data" ? <Mail /> : null}
         </>
     );
 }

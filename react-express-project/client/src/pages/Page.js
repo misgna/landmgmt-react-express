@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, createContext} from "react";
 import HeaderUser from "../components/header/HeaderUser";
 import Menu from "../components/menu/Menu";
 import Footer from "../components/footer/FooterStick";
@@ -25,8 +25,8 @@ const Page = () => {
     
     return (
         <>
-            <HeaderUser team={team}/>
-            <Menu team={team}/>
+            <HeaderUser user={user} team={team}/>
+            <Menu user={user} team={team}/>
             {/*<Footer />*/}
         </>
     );

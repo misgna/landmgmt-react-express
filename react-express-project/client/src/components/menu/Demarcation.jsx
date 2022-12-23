@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import JobDesc from '../tasks/team5/info/JobDesc';
 import Circular from '../tasks/team5/tasks/Circular';
 import ResettlementDecision from '../tasks/team5/tasks/ResettlementDecision';
+import Mail from '../tasks/common/mail/Mail';
 
 const Demarcation = () => {
     const [task, setTask] = useState("");
@@ -29,15 +30,16 @@ const Demarcation = () => {
                     </Button>
                 </Nav.Item>
                 <Nav.Item className="m-2">
-                    <Button className='btn' onClick={()=>handleClick("")}>
+                    <Button className='btn' onClick={()=>handleClick("message")}>
                     መልዕክት
                     </Button>
                 </Nav.Item>
                 
             </Nav>
-            {task === "tasks" && <JobDesc />}
-            {task === "circular" && <Circular />}
-            {task === "certificate" && <ResettlementDecision />}
+            {task === "tasks" ? <JobDesc /> : null}
+            {task === "circular" ? <Circular /> : null}
+            {task === "certificate" ? <ResettlementDecision /> : null}
+            {task === "message" ? <Mail /> : null}
         </>
     );
 }

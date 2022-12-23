@@ -13,6 +13,10 @@ const propertyInfoRouter = require('./routes/PropertyInfo');
 const developmentInfoRouter = require('./routes/DevelopmentInfo');
 const resettlementOptionsRouter = require('./routes/ResettlementOptions');
 const dataSourceRouter = require('./routes/DataSource');
+const teamRoleRouter = require('./routes/TeamRole');
+const mailRouter = require('./routes/Mail');
+const leaseInfoRouter = require('./routes/LeaseInfo');
+const tenantInfoRouter = require('./routes/TenantInfo');
 
 const jwt = require("jsonwebtoken");
 const auth = require("./auth");
@@ -36,6 +40,10 @@ app.use('/propertyinfo', propertyInfoRouter);
 app.use('/developmentinfo', developmentInfoRouter);
 app.use('/resettlementoptions', resettlementOptionsRouter);
 app.use('/datacollectedfrom', dataSourceRouter);
+app.use('/teamrole', teamRoleRouter);
+app.use('/mail', mailRouter);
+app.use('/leaseinfo', leaseInfoRouter);
+app.use('/tenant', tenantInfoRouter);
 
 app.listen(PORT, ()=>{
     console.log(`listening at ${PORT}`);

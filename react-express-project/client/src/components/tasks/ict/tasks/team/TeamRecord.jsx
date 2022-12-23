@@ -1,16 +1,13 @@
 import React from "react";
-import Button from "react-bootstrap/esm/Button";
-import Card from "react-bootstrap/esm/Card";
-import Form from "react-bootstrap/esm/Form";
-import InputGroup from "react-bootstrap/esm/InputGroup";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
+import { Button, Card, Form, InputGroup, Alert } from "react-bootstrap";
 import { } from "@fortawesome/fontawesome-svg-core";
 import Axios from 'axios';
 import { useState, useEffect } from "react";
 import Select from 'react-select';
-import Alert from 'react-bootstrap/Alert';
 
 const TeamRecord = () => {
+    const navigate = useNavigate();
     const [team, setTeam] = useState({});
     const [teams, setTeams] = useState([{}]);
     const [search, setSearch] = useState({});
@@ -162,9 +159,7 @@ const TeamRecord = () => {
                                     <Button variant="warning badge" className='m-2' onClick={() => setTeam({ teamId: t.teamId, teamName: t.teamName })}>
                                         በመመዝገብያ ቅፅ ኣሳይ
                                     </Button>
-                                    <Button variant="success badge" className='m-2' onClick={() => setTeam({ teamId: t.teamId, teamName: t.teamName })}>
-                                        የስራ ድርሻዎች ጨምር
-                                    </Button>
+                        
                                 </Card.Footer>
                             </Card>
                         ))

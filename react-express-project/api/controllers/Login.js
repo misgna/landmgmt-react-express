@@ -42,7 +42,8 @@ exports.createUserAccount = (req, res, next) => {
     loginService.createAccount(data, (err, data) => {
         if (err) {
             res.send({
-                status: "error"
+                status: "error",
+                message: "Account is not created!"
             });
         } else {
             res.send({
@@ -51,4 +52,21 @@ exports.createUserAccount = (req, res, next) => {
             });
         }
     });
+}
+exports.changeStatusUser = (req, res, next) => {
+    const data = {empId: req.params.empId, status: req.params.status};
+    
+    loginService.changeAccountStatus(data, (err, data) => {
+        if (err) {
+            res.send({
+                status: "error",
+                message: "Status is not changed!"
+            });
+        } else {
+            res.send({
+                status: "ok",
+                message: "Status is changed!"
+            });
+        }
+    })
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/esm/Button';
 import Nav from 'react-bootstrap/Nav';
 import JobDesc from '../tasks/team3/info/JobDesc';
+import Mail from '../tasks/common/mail/Mail';
 
 const LandBankMenu = () => {
     const [task, setTask] = useState("");
@@ -26,8 +27,14 @@ const LandBankMenu = () => {
                         የመሬት ወረራ
                     </Button>
                 </Nav.Item>
+                <Nav.Item className="m-2">
+                    <Button className='btn' onClick={()=>handleClick("message")}>
+                    መልዕክት
+                    </Button>
+                </Nav.Item>
             </Nav>
-            {task === "tasks" && <JobDesc />}
+            {task === "tasks" ? <JobDesc /> : null}
+            {task === "message" ? <Mail /> : null}
         </>
     );
 }

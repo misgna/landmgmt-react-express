@@ -2,7 +2,7 @@ const conn = require('../config/db');
 
 module.exports = {
     verifyUser: (data, callback) => {
-        const sql = "SELECT * FROM login WHERE empId = ? AND empPassword = ?";
+        const sql = "SELECT * FROM login WHERE empId = ? AND empPassword = ? AND Status = 'Pending'";
         conn.query(sql, [data.empId, data.empPassword], (err, data)=>{
             if (err) return callback(err);
             else return callback(null, data);
