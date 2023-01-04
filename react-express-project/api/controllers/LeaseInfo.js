@@ -71,7 +71,7 @@ module.exports = {
         })
     },
     getLeaseInfoById: (req, res, next) => {
-        const data = req.params;
+        const data = req.body;
 
         leaseInfoServices.getLeaseInfoById(data, (err, result) => {
             if (err) {
@@ -248,7 +248,6 @@ module.exports = {
     },
     getLandlordInfoById: (req, res, next) => {
         const data = req.body;
-
         leaseInfoServices.getLandlordInfoById(data, (err, result) => {
             if (err) {
                 res.send({
@@ -264,5 +263,52 @@ module.exports = {
                 });
             }
         })
+    },
+    getSearchResult: (req, res, next) => {
+        const searchBy = req.body.filterBy;
+        const keywords = req.body.keywords;
+        
+        console.log(req.body);
+        if (searchBy === '1') {
+            const data = {LeaseNumber: keywords};
+            
+            leaseInfoServices.getTenantInfoById(data, (err, result) => {
+                
+                if (err) {
+                    res.send({
+                        status: "error",
+                        message: "Record not found! Please check using Tenant name!"
+                    });
+                }
+                else {
+                    
+                    res.send({
+                        status: "ok",
+                        message: "Record is retrieved!",
+                        result: result
+                    });
+                }
+            });
+        } else if (searchBy === '2') {
+            const data = {search: keywords};
+            
+            leaseInfoServices.getTenantInfoByName(data, (err, result) => {
+                console.log(result);
+                if (err) {
+                    res.send({
+                        status: "error",
+                        message: "Record not found! Please check using Lease Number!"
+                    });
+                }
+                else {
+                    
+                    res.send({
+                        status: "ok",
+                        message: "Record is retrieved!",
+                        result: result
+                    });
+                }
+            })
+        }
     }
 }

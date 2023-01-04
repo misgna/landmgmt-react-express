@@ -90,6 +90,15 @@ module.exports = {
             else callback(null, result);
         })
     },
+    getTenantInfoByName: (data, callback) => {
+        const search = data.search;
+        const sql = "SELECT * FROM lease_tenant WHERE (TenantName LIKE '%" + search + "%') OR (TenantFName LIKE '%" + search + "%') OR (TenantGFName LIKE '%" + search + "%')";
+
+        conn.query(sql, (err, result) => {
+            if (err) callback(err);
+            else callback(null, result);
+        });
+    },
     addLandlordInfo: (data, callback) => {
         const sql = "INSERT INTO lease_landlord (LeaseNumber, WitnessName, WitnessFName, WitnessGFName, WitnessNationality, WitnessSubcity, WitnessWereda, \
                             WitnessHouseNumber, WitnessPhonenumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
