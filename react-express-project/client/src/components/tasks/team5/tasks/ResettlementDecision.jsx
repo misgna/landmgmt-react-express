@@ -84,7 +84,7 @@ const ResettlementDecision = () => {
                         </Form.Group>
                     </Col>
                     <Col className="bg-light p-2 border">
-                        <Form.Label className='bg-secondary text-white p-2 w-100'>የአንድ አመት ቤት መከራያ</Form.Label>
+                        <Form.Label className='bg-secondary text-white p-2 w-100'>የሁለት አመት ቤት መከራያ</Form.Label>
                         <Form.Group as={Col}>
                             <Form.Label>በአሀዝ</Form.Label>
                             <Form.Control type="text" className="" name="" />

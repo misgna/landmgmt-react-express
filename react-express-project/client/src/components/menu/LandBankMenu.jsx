@@ -4,7 +4,9 @@ import Nav from 'react-bootstrap/Nav';
 import JobDesc from '../tasks/team3/info/JobDesc';
 import Mail from '../tasks/common/mail/Mail';
 
-const LandBankMenu = () => {
+const LandBankMenu = (props) => {
+    const user = props.user;
+    const team = props.team;
     const [task, setTask] = useState("");
     const handleClick = (task) => {
         setTask(task);
@@ -34,7 +36,7 @@ const LandBankMenu = () => {
                 </Nav.Item>
             </Nav>
             {task === "tasks" ? <JobDesc /> : null}
-            {task === "message" ? <Mail /> : null}
+            {task === "message" ? <Mail user={user} team={team}/> : null }
         </>
     );
 }

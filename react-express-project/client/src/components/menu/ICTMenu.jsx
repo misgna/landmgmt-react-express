@@ -8,7 +8,9 @@ import TeamRoleRecord from '../tasks/ict/tasks/team/RolesOfTeamRecord';
 import Mail from '../tasks/common/mail/Mail';
 //import Page from '../../pages/Page';
 
-const ICTMenu = () => {
+const ICTMenu = (props) => {
+    const user = props.user;
+    const team = props.team;
     const [task, setTask] = useState("");
     const handleClick = (task) => {
         setTask(task);
@@ -46,7 +48,7 @@ const ICTMenu = () => {
             {task === "account" ? <EmployeeRecord /> : null}
             {task === "team" ? <TeamRecord /> : null}
             {task === "teamrole" ? <TeamRoleRecord /> : null}
-            {task === "message" ? <Mail /> : null}
+            {task === "message" ? <Mail user={user} team={team}/> : null }
         </>
     );
 }

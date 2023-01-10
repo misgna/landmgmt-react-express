@@ -6,7 +6,9 @@ import SED from '../tasks/team4/tasks/SED';
 import Mail from '../tasks/common/mail/Mail';
 
 
-const DataCollectorMenu = () => {
+const DataCollectorMenu = (props) => {
+    const user = props.user;
+    const team = props.team;
     const [task, setTask] = useState("");
     const handleClick = (task) => {
         setTask(task);
@@ -32,7 +34,7 @@ const DataCollectorMenu = () => {
             </Nav>
             {task === "tasks" ? <ListOfTasks /> : null}
             {task === "data" ? <SED /> : null}
-            {task === "data" ? <Mail /> : null}
+            {task === "message" ? <Mail user={user} team={team}/> : null }
         </>
     );
 }

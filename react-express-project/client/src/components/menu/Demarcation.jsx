@@ -6,7 +6,9 @@ import Circular from '../tasks/team5/tasks/Circular';
 import ResettlementDecision from '../tasks/team5/tasks/ResettlementDecision';
 import Mail from '../tasks/common/mail/Mail';
 
-const Demarcation = () => {
+const Demarcation = (props) => {
+    const user = props.user;
+    const team = props.team;
     const [task, setTask] = useState("");
     const handleClick = (task) => {
         setTask(task);
@@ -39,7 +41,7 @@ const Demarcation = () => {
             {task === "tasks" ? <JobDesc /> : null}
             {task === "circular" ? <Circular /> : null}
             {task === "certificate" ? <ResettlementDecision /> : null}
-            {task === "message" ? <Mail /> : null}
+            {task === "message" ? <Mail user={user} team={team}/> : null }
         </>
     );
 }

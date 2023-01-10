@@ -18,13 +18,13 @@ const Menu = (props) => {
         } else if (teamId === 'ቡድን 2') {
             return <LandPrepMenu user = {user} team={team}/>;
         } else if (teamId === 'ቡድን 3') {
-            return <LandBankMenu />;
+            return <LandBankMenu user = {user} team={team}/>;
         } else if (teamId === 'ቡድን 4') {
-            return <DataCollectorMenu />;
+            return <DataCollectorMenu user = {user} team={team}/>;
         } else if (teamId === 'ቡድን 5') {
-            return <Demarcation />;
+            return <Demarcation user = {user} team={team}/>;
         } else if (teamId === 'ICT') {
-            return <ICTMenu />;
+            return <ICTMenu user = {user} team={team}/>;
         } else if (teamId === '') {
             return <ICTMenu />;
         }
