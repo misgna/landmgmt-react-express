@@ -123,42 +123,45 @@ const Search = () => {
                 }
             </Row>
             <Row className="container justify-content-center">
-                {active && (
-                <Modal show={show} onHide={handleClose}>
-                    <Modal.Header>
-                        <Modal.Title>ሙሉ የሊዝ መረጃ</Modal.Title>
-                    </Modal.Header>
+                {
+                    active && (
+                        <Modal show={show} onHide={handleClose}>
+                            <Modal.Header>
+                                <Modal.Title>ሙሉ የሊዝ መረጃ</Modal.Title>
+                            </Modal.Header>
 
-                    <Modal.Body>
-                        <Row >
-                            <Col>የሊዝ ቁጥር</Col><Col>{leaseInfo[0].LeaseNumber}</Col>
-                        </Row>
-                        <Row >
-                            <Col>የሊዝ ዓይነት</Col><Col>
-                                {
-                                    lease_types.filter((type) => type.id === leaseInfo[0].LeaseType)[0]['type']
-                                }
-                            </Col>
-                        </Row>
-                        <Row >
-                            <Col>የተፈረመበት ቀን</Col><Col>{leaseInfo[0].LeaseSingedDate}</Col>
-                        </Row>
-                        <Row >
-                            <Col>ዉል ተቀባይ</Col><Col>{tenantInfo[0].TenantName + ' ' + tenantInfo[0].TenantFName + ' ' + tenantInfo[0].TenantGFName}</Col>
-                        </Row>
-                        <Row >
-                            <Col>ኣድራሻ</Col>
-                            <Col>
-                                <Row><Col>ክ/ከተማ</Col><Col>{tenantInfo[0].TenantSubcity}</Col></Row>
-                                <Row><Col>ወረዳ</Col><Col>{tenantInfo[0].TenantWereda}</Col></Row>
-                                <Row><Col>የቤት ቁጥር</Col><Col>{tenantInfo[0].TenantHouseNumber}</Col></Row>
-                                <Row><Col>ስ/ቁጥር</Col><Col>{tenantInfo[0].TenantPhonenumber}</Col></Row>
-                            </Col>
-                        </Row>
-                    </Modal.Body>
-                    <Modal.Footer></Modal.Footer>
-                </Modal>
-                )}
+                            <Modal.Body>
+                                <Row >
+                                    <Col>የሊዝ ቁጥር</Col><Col>{leaseInfo[0].LeaseNumber}</Col>
+                                </Row>
+                                <Row >
+                                    <Col>የሊዝ ዓይነት</Col><Col>
+                                        {
+                                            lease_types.map((lt => (
+                                                lt.id === leaseInfo[0].LeaseType ? lt.type : null
+                                            )))
+                                        }
+                                    </Col>
+                                </Row>
+                                <Row >
+                                    <Col>የተፈረመበት ቀን</Col><Col>{leaseInfo[0].LeaseSingedDate}</Col>
+                                </Row>
+                                <Row >
+                                    <Col>ዉል ተቀባይ</Col><Col>{tenantInfo[0].TenantName + ' ' + tenantInfo[0].TenantFName + ' ' + tenantInfo[0].TenantGFName}</Col>
+                                </Row>
+                                <Row >
+                                    <Col>ኣድራሻ</Col>
+                                    <Col>
+                                        <Row><Col>ክ/ከተማ</Col><Col>{tenantInfo[0].TenantSubcity}</Col></Row>
+                                        <Row><Col>ወረዳ</Col><Col>{tenantInfo[0].TenantWereda}</Col></Row>
+                                        <Row><Col>የቤት ቁጥር</Col><Col>{tenantInfo[0].TenantHouseNumber}</Col></Row>
+                                        <Row><Col>ስ/ቁጥር</Col><Col>{tenantInfo[0].TenantPhonenumber}</Col></Row>
+                                    </Col>
+                                </Row>
+                            </Modal.Body>
+                            <Modal.Footer></Modal.Footer>
+                        </Modal>
+                    )}
             </Row>
         </Container>
     );
