@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, InputGroup, Button, Container, Row, Col, Badge, Modal } from 'react-bootstrap';
+import { Form, InputGroup, Button, Container, Row, Col, Badge, Modal, Table } from 'react-bootstrap';
 import Axios from 'axios';
 import lease_types from './constants';
 
@@ -7,7 +7,7 @@ const Search = () => {
     const [search, setSearch] = useState({});
     const [tenants, setTenants] = useState([]);
     const [tenantInfo, setTenantInfo] = useState([{}]);
-    const [leaseInfo, setLeaseInfo] = useState([{}]);
+    const [leaseInfo, setLeaseInfo] = useState({});
     const [landlordInfo, setLandlordInfo] = useState([{}]);
     const [show, setShow] = useState(false);
     const [active, setActive] = useState(false);
@@ -37,12 +37,12 @@ const Search = () => {
     const getLeaseInfo = async (data) => {
         const response = await Axios.post('http://localhost:4000/leaseinfo/search', data);
         const res = await response.data;
-        setLeaseInfo(res.result);
+        setLeaseInfo(res.result[0]);
     }
     const getTenantInfo = async (data) => {
         const response = await Axios.post('http://localhost:4000/tenant/search', data);
         const res = await response.data;
-        setTenantInfo(res.result);
+        setTenantInfo(res.result[0]);
     }
     const getLandlordInfo = async (data) => {
         const response = await Axios.post('http://localhost:4000/landlord/search', data);
@@ -64,7 +64,17 @@ const Search = () => {
     }
 
     const handleDelete = (leaseNumber) => {
+        const data = { LeaseNumber: leaseNumber }
+        const endpoints = [
+            `http://localhost:4000/leaseinfo/${leaseNumber}`,
+            `http://localhost:4000/tenant/${leaseNumber}`,
+            `http://localhost:4000/landlord/${leaseNumber}`
+        ];
 
+        Axios.all(endpoints.map((endpoint) => Axios.delete(endpoint, data)))
+            .then((data) => {
+                alert(JSON.stringify(data));
+            })
     }
 
     return (
@@ -105,12 +115,12 @@ const Search = () => {
                                     onClick={() => handleView(tenant.LeaseNumber)}>
                                     እይ
                                 </Badge>
-                                <Badge
+                                {/* <Badge
                                     bg="warning"
                                     className='w-25 mx-2 btn'
                                     onClick={() => handleEdit(tenant.LeaseNumber)}>
                                     አስተካክል
-                                </Badge>
+                                </Badge> */}
                                 <Badge
                                     bg="danger"
                                     className='w-25 mx-2 btn'
@@ -123,45 +133,122 @@ const Search = () => {
                 }
             </Row>
             <Row className="container justify-content-center">
-                {
-                    active && (
-                        <Modal show={show} onHide={handleClose}>
-                            <Modal.Header>
-                                <Modal.Title>ሙሉ የሊዝ መረጃ</Modal.Title>
-                            </Modal.Header>
+                {/*
+                    active && (*/
+                    <Modal show={show} onHide={handleClose} size="lg">
+                        <Modal.Header>
+                            <Modal.Title>ሙሉ የሊዝ መረጃ</Modal.Title>
+                        </Modal.Header>
 
-                            <Modal.Body>
-                                <Row >
-                                    <Col>የሊዝ ቁጥር</Col><Col>{leaseInfo[0].LeaseNumber}</Col>
-                                </Row>
-                                <Row >
-                                    <Col>የሊዝ ዓይነት</Col><Col>
+                        <Modal.Body>
+                        <Row className='border bg-primary text-white p-2 mt-2'>
+                                <Col>የሊዝ መረጃ</Col>
+                            </Row>
+                            <Row className=' bg-light p-2 m-2'>
+                                <Form.Group as={Col} className="col-3">
+                                    <Form.Label>የዉል ቁጥር</Form.Label>
+                                    <Form.Control type="text" className="p-2" name="LeaseNumber"
+                                        value={leaseInfo.LeaseNumber || ""}
+                                        onChange={handleChange}
+                                        style={{ borderColor: leaseInfo.LeaseNumber ? "gray" : "red" }} />
+                                </Form.Group>
+                                <Form.Group as={Col} className="col-3">
+                                    <Form.Label>የተፈረመበት ቀን</Form.Label>
+                                    <Form.Control type="text" className="p-2" name="LeaseSignedDate"
+                                        value={leaseInfo.LeaseSignedDate || ""}
+                                        onChange={handleChange}
+                                        style={{ borderColor: leaseInfo.LeaseSignedDate ? "gray" : "red" }} />
+                                </Form.Group>
+                                <Form.Group as={Col}>
+                                    <Form.Label>የዉል ዓይነት</Form.Label>
+                                    <select className='form-select form-select-sm p-2' name="LeaseType"
+                                        value={leaseInfo.LeaseType || ""}
+                                        onChange={handleChange}
+                                        style={{ borderColor: leaseInfo.LeaseType ? "gray" : "red" }}>
+                                        <option value="" className='font-weight-bold'>የሊዝ ዓይነት የምረጡ</option>
                                         {
-                                            lease_types.map((lt => (
-                                                lt.id === leaseInfo[0].LeaseType ? lt.type : null
-                                            )))
+                                            lease_types.map((lease_type) => (
+                                                <option value={lease_type.id}>{lease_type.type}</option>
+                                            ))
                                         }
-                                    </Col>
+                                    </select>
+                                </Form.Group>
+                            </Row>
+                            <Row className='bg-primary text-white p-2 mt-2'>
+                                <Col>የዉል ተቀባይ መረጃ</Col>
+                            </Row>
+                            <Row className='border p-2 justify-content-center '>
+
+                                <Row className='bg-primary  opacity-50  text-white p-2 m-2'>
+                                    <Col>ዉል ተቀባይ</Col>
                                 </Row>
-                                <Row >
-                                    <Col>የተፈረመበት ቀን</Col><Col>{leaseInfo[0].LeaseSingedDate}</Col>
+                                <Row className='bg-light p-2 m-2'>
+                                    <Form.Group as={Col}>
+                                        <Form.Label>ስም</Form.Label>
+                                        <Form.Control type="text" className="" name="TenantName"
+                                            value={tenantInfo.TenantName || ""}
+                                            onChange={handleChange}
+                                             />
+                                    </Form.Group>
+                                    <Form.Group as={Col}>
+                                        <Form.Label>የኣባት ስም</Form.Label>
+                                        <Form.Control type="text" className="" name="TenantFName"
+                                            value={tenantInfo.TenantFName || ""}
+                                            onChange={handleChange}
+                                            />
+                                    </Form.Group>
+                                    <Form.Group as={Col}>
+                                        <Form.Label>የኣያት ስም</Form.Label>
+                                        <Form.Control type="text" className="" name="TenantGFName"
+                                            value={tenantInfo.TenantGFName || ""}
+                                            onChange={handleChange}
+                                             />
+                                    </Form.Group>
+                                    <Form.Group as={Col}>
+                                        <Form.Label>ዜግነት</Form.Label>
+                                        <Form.Control type="text" className="" name="TenantNationality" 
+                                        value={tenantInfo.TenantNationality || ""} onChange={handleChange} />
+                                    </Form.Group>
                                 </Row>
-                                <Row >
-                                    <Col>ዉል ተቀባይ</Col><Col>{tenantInfo[0].TenantName + ' ' + tenantInfo[0].TenantFName + ' ' + tenantInfo[0].TenantGFName}</Col>
-                                </Row>
-                                <Row >
+                                <Row className='bg-primary opacity-50 text-white p-2 m-2'>
                                     <Col>ኣድራሻ</Col>
-                                    <Col>
-                                        <Row><Col>ክ/ከተማ</Col><Col>{tenantInfo[0].TenantSubcity}</Col></Row>
-                                        <Row><Col>ወረዳ</Col><Col>{tenantInfo[0].TenantWereda}</Col></Row>
-                                        <Row><Col>የቤት ቁጥር</Col><Col>{tenantInfo[0].TenantHouseNumber}</Col></Row>
-                                        <Row><Col>ስ/ቁጥር</Col><Col>{tenantInfo[0].TenantPhonenumber}</Col></Row>
-                                    </Col>
                                 </Row>
-                            </Modal.Body>
-                            <Modal.Footer></Modal.Footer>
-                        </Modal>
-                    )}
+                                <Row className='bg-light p-2 m-2'>
+                                    <Form.Group as={Col}>
+                                        <Form.Label>ክፍለ ከተማ</Form.Label>
+                                        <Form.Control type="text" className="" name="TenantSubcity" 
+                                        value={tenantInfo.TenantSubcity || ""} onChange={handleChange} />
+                                    </Form.Group>
+                                    <Form.Group as={Col}>
+                                        <Form.Label>ወረዳ</Form.Label>
+                                        <Form.Control type="text" className="" name="TenantWereda" 
+                                        value={tenantInfo.TenantWereda || ""} onChange={handleChange} />
+                                    </Form.Group>
+                                    <Form.Group as={Col}>
+                                        <Form.Label>የቤት ቁጥር</Form.Label>
+                                        <Form.Control type="text" className="" name="TenantHouseNumber" 
+                                        value={tenantInfo.TenantHouseNumber || ""} onChange={handleChange} />
+                                    </Form.Group>
+                                    <Form.Group as={Col}>
+                                        <Form.Label>ስልክ ቁጥር</Form.Label>
+                                        <Form.Control type="text" className="" name="TenantPhonenumber" 
+                                        value={tenantInfo.TenantPhonenumber || ""} onChange={handleChange} />
+                                    </Form.Group>
+                                </Row>
+                            </Row>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button className='btn-warning w-25'>
+                                አስተካክል
+                            </Button>
+                            <Button
+                                className='btn-danger w-25'
+                                onClick={handleClose}>
+                                ዝጋ
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                    /*)*/}
             </Row>
         </Container>
     );
