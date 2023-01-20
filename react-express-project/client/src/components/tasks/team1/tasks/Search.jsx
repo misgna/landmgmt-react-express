@@ -74,7 +74,10 @@ const Search = () => {
         Axios.all(endpoints.map((endpoint) => Axios.delete(endpoint, data)))
             .then((data) => {
                 alert(JSON.stringify(data));
-            })
+            });
+        setLandlordInfo([{}]);
+        setTenantInfo([{}]);
+        setLeaseInfo({});
     }
 
     return (
