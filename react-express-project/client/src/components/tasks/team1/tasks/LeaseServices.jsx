@@ -17,16 +17,19 @@ const LeaseServices = () => {
     const handleRecord = () => {
         if (lease.leaseNumber && lease.leaseType && lease.signedDate && lease.tenantName && lease.tenantFName && 
                                 lease.tenantGFName ) {
-            let leaseBasicData = { LeaseNumber: lease.leaseNumber, LeaseType: lease.leaseType, SignedDate: lease.signedDate };
-            let tenantData = { LeaseNumber: lease.leaseNumber, TenantName: lease.tenantName, TenantFName: lease.tenantFName, TenantGFName: lease.tenantGFName,
-                                TenantNationality: lease.tenantNationality, TenantSubcity: lease.tenantSubcity, TenantWereda: lease.tenantWereda, 
-                                TenantHouseNumber: lease.tenantHouseNumber, TenantPhonenumber: lease.tenantPhonenumber, TenantWitnessName: lease.tenantWitnessName, 
-                                TenantWitnessFName: lease.tenantWitnessFName, TenantWitnessGFName: lease.tenantWitnessGFName, TenantWitnessNationality: lease.tenantWitnessNationality, 
-                                TenantWitnessSubcity: lease.tenantWitnessSubcity, TenantWitnessWereda: lease.tenantWitnessWereda, 
-                                TenantWitnessHouseNumber: lease.tenantWitnessHouseNumber,TenantWitnessPhonenumber: lease.tenantWitnessPhonenumber };
-            let landlordData = {LeaseNumber: lease.leaseNumber, WitnessName: lease.witnessName, WitnessFName: lease.witnessFName, WitnessGFName: lease.witnessGFName,
-                                WitnessNationality: lease.witnessNationality, WitnessSubcity: lease.witnessSubcity, WitnessWereda: lease.witnessWereda, 
-                                WitnessHouseNumber: lease.witnessHouseNumber, WitnessPhonenumber: lease.witnessPhonenumber};
+            let leaseBasicData = { LeaseNumber: lease.leaseNumber, LeaseType: lease.leaseType, SignedDate: lease.signedDate, TenantName: lease.tenantName, TenantFName: lease.tenantFName, TenantGFName: lease.tenantGFName,
+                TenantNationality: lease.tenantNationality, TenantSubcity: lease.tenantSubcity, TenantWereda: lease.tenantWereda, 
+                TenantHouseNumber: lease.tenantHouseNumber, TenantPhonenumber: lease.tenantPhonenumber};
+                
+            // let tenantData = { LeaseNumber: lease.leaseNumber, TenantName: lease.tenantName, TenantFName: lease.tenantFName, TenantGFName: lease.tenantGFName,
+            //                     TenantNationality: lease.tenantNationality, TenantSubcity: lease.tenantSubcity, TenantWereda: lease.tenantWereda, 
+            //                     TenantHouseNumber: lease.tenantHouseNumber, TenantPhonenumber: lease.tenantPhonenumber, TenantWitnessName: lease.tenantWitnessName, 
+            //                     TenantWitnessFName: lease.tenantWitnessFName, TenantWitnessGFName: lease.tenantWitnessGFName, TenantWitnessNationality: lease.tenantWitnessNationality, 
+            //                     TenantWitnessSubcity: lease.tenantWitnessSubcity, TenantWitnessWereda: lease.tenantWitnessWereda, 
+            //                     TenantWitnessHouseNumber: lease.tenantWitnessHouseNumber,TenantWitnessPhonenumber: lease.tenantWitnessPhonenumber };
+            // let landlordData = {LeaseNumber: lease.leaseNumber, WitnessName: lease.witnessName, WitnessFName: lease.witnessFName, WitnessGFName: lease.witnessGFName,
+            //                     WitnessNationality: lease.witnessNationality, WitnessSubcity: lease.witnessSubcity, WitnessWereda: lease.witnessWereda, 
+            //                     WitnessHouseNumber: lease.witnessHouseNumber, WitnessPhonenumber: lease.witnessPhonenumber};
             
 
             Axios.post('http://localhost:4000/leaseinfo', leaseBasicData)
@@ -36,19 +39,19 @@ const LeaseServices = () => {
                     console.log(err);
                 });
             
-                Axios.post('http://localhost:4000/leaseinfo/landlord', landlordData)
-                .then((response) => {
-                    alert(JSON.stringify(response.data));
-                }).catch((err) => {
-                    console.log(err);
-                });
+                // Axios.post('http://localhost:4000/leaseinfo/landlord', landlordData)
+                // .then((response) => {
+                //     alert(JSON.stringify(response.data));
+                // }).catch((err) => {
+                //     console.log(err);
+                // });
 
-                Axios.post('http://localhost:4000/leaseinfo/tenant', tenantData)
-                .then((response) => {
-                    alert(JSON.stringify(response.data));
-                }).catch((err) => {
-                    console.log(err);
-                });
+                // Axios.post('http://localhost:4000/leaseinfo/tenant', tenantData)
+                // .then((response) => {
+                //     alert(JSON.stringify(response.data));
+                // }).catch((err) => {
+                //     console.log(err);
+                // });
         } else {
             alert("Please fill the boxes highlighted with red!");
         }
@@ -106,7 +109,7 @@ const LeaseServices = () => {
                     </Row>
 
                     {/*<ContactInfo data={ contactInfo }/>*/}
-                    <Row className='bg-primary opacity-50 text-white p-2 m-2'>
+                    {/* <Row className='bg-primary opacity-50 text-white p-2 m-2'>
                         <Col>የዉል ሰጪ እማኝ</Col>
                     </Row>
                     <Row className='bg-light p-2 m-2'>
@@ -147,7 +150,7 @@ const LeaseServices = () => {
                             <Form.Label>ስልክ ቁጥር</Form.Label>
                             <Form.Control type="text" className="" name="witnessPhonenumber" value={lease.witnessPhonenumber || ""} onChange={handleChange} />
                         </Form.Group>
-                    </Row>
+                    </Row> */}
                 </Row>
 
                 {/*<LeaseRentalInfo />*/}
@@ -208,7 +211,7 @@ const LeaseServices = () => {
                         </Form.Group>
                     </Row>
 
-                    <Row className='bg-primary opacity-50 text-white p-2 m-2'>
+                    {/* <Row className='bg-primary opacity-50 text-white p-2 m-2'>
                         <Col>የዉል ተቀባይ እማኝ</Col>
                     </Row>
                     <Row className='bg-light p-2 m-2'>
@@ -249,7 +252,7 @@ const LeaseServices = () => {
                             <Form.Label>ስልክ ቁጥር</Form.Label>
                             <Form.Control type="text" className="" name="tenantWitnessPhonenumber" value={lease.tenantWitnessPhonenumber || ""} onChange={handleChange} />
                         </Form.Group>
-                    </Row>
+                    </Row> */}
                 </Row>
                 <Row className='text-center mt-3 mb-3 border-bottom pb-2 pt-2'>
                     <Col className='text-center'>
