@@ -5,6 +5,7 @@ import JobDesc from '../tasks/team1/info/JobDesc';
 import LeaseServices from '../tasks/team1/tasks/LeaseServices';
 import Mail from '../tasks/common/mail/Mail';
 import Search from '../tasks/team1/tasks/Search';
+import LeaseFollowUp from '../tasks/team1/tasks/LeaseFollowUp';
 
 const LeaseMenu = (props) => {
     const user = props.user;
@@ -22,8 +23,8 @@ const LeaseMenu = (props) => {
                     </Button>
                 </Nav.Item>
                 <Nav.Item className="col-2 m-2">
-                    <Button className='btn w-100 btn-secondary' onClick={()=>handleClick("")}>
-                        የይዞታ ካርታ ማዘጋጀት
+                    <Button className='btn w-100 btn-secondary' onClick={()=>handleClick("leasefollowup")}>
+                    የሊዝ ክትትል
                     </Button>
                 </Nav.Item>
                 <Nav.Item className='col-2 m-2'>
@@ -46,6 +47,7 @@ const LeaseMenu = (props) => {
             {task === "leaseservices" ? <LeaseServices /> : null}
             {task === "message" ? <Mail user={user} team={team}/> : null }
             {task === "search" ? <Search /> : null}
+            {task === "leasefollowup" ? <LeaseFollowUp /> : null}
         </>
     );
 }

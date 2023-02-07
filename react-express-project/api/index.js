@@ -45,9 +45,9 @@ app.use('/datacollectedfrom', dataSourceRouter);
 app.use('/teamrole', teamRoleRouter);
 app.use('/mail', mailRouter);
 app.use('/leaseinfo', leaseInfoRouter);
-app.use('/tenant', tenantInfoRouter);
+//app.use('/tenant', tenantInfoRouter);
 app.use('/search', tenantSearch);
-app.use('/landlord', landlordInfoRouter);
+//app.use('/landlord', landlordInfoRouter);
 
 app.listen(PORT, ()=>{
     console.log(`listening at ${PORT}`);

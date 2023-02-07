@@ -5,8 +5,8 @@ const leaseInfoControllers = require('../controllers/LeaseInfo');
 router.get('/', leaseInfoControllers.getLeaseInfo);
 router.post('/search', leaseInfoControllers.getLeaseInfoById);
 router.post('/', leaseInfoControllers.addLeaseInfo);
-router.put('/:LeaseNumber', leaseInfoControllers.updateLeaseInfo);
-router.delete('/:LeaseNumber', leaseInfoControllers.deleteLeaseInfo);
+router.put('/', leaseInfoControllers.updateLeaseInfo);
+router.delete('/', leaseInfoControllers.deleteLeaseInfo);
 
 // router.get('/tenant', leaseInfoControllers.getTenantInfo);
 // router.get('/tenant/:LeaseNumber', leaseInfoControllers.getTenantInfoById);
