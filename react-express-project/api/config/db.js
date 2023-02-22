@@ -51,5 +51,9 @@ conn.query(sql_leaseinfo, (err) => {
     else console.log("Table created!");
 })
 
-
+const sql_leasefollowup = "CREATE TABLE if not exists leasefollowup (LeaseNumber varchar(255), LeaseFollowupType varchar(255), LeaseFollowupResult varchar(255), LeaseFollowupDecision varchar(255), LeaseFollowupDate varchar(50), PRIMARY KEY(LeaseNumber, LeaseFollowupDate))";
+conn.query(sql_leasefollowup, (err) => {
+    if (err) throw err;
+    else console.log("Table created!");
+})
 module.exports = conn;
