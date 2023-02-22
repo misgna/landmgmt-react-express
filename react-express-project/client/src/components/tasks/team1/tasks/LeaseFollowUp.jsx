@@ -47,15 +47,15 @@ const LeaseFollowUp = () => {
                 </Row>
                 <Row className='border p-2 justify-content-center'>
                    
-                    <Row className='bg-light p-2 m-2'>
-                        <Form.Group as={Col} className="col-6">
+                    <Row className='row'>
+                        <Form.Group as={Col} className="col-5 bg-light p-2 m-2">
                             <Form.Label>የዉል ቁጥር</Form.Label>
                             <Form.Control type="text" className="p-2" name="leaseNumber"
                                 value={lease.leaseNumber || ""}
                                 onChange={handleChange}
                                 style={{ borderColor: lease.leaseNumber ? "gray" : "red" }} />
                         </Form.Group>
-                        <Form.Group as={Col} className="col-6">
+                        <Form.Group as={Col} className="col-5 bg-light p-2 m-2">
                             <Form.Label>የኣገልግሎት ክትትል ዓይነት</Form.Label>
                             <Form.Select type="select" className="p-2" name="" multiple>
                                 <option className='border-bottom p-2'>የግንባታ መጀመር ክትትል</option> 
